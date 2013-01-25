@@ -13,7 +13,7 @@ var poolSize int = 0
 
 func Create(size int) {
 	poolSize = size
-	idlech = make(chan *coroutine, poolSize)
+	idlech = make(chan *coroutine)
 	for i := 0; i < poolSize; i++ {
 		c := &coroutine{make(chan func()), idlech, make(chan int)}
 		go c.run()
