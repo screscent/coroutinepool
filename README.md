@@ -1,26 +1,48 @@
-coroutinepool
+##coroutinepool
 =============
 
 gocoroutine pool
 
 
-example
-================
+##example
+==============================
 
 
-create
-======
+- create
+----
+
+```go
 coroutinepool.Create(6)
 
-process
-======
+//or
+
+p:=coroutinepool.NewPool()
+p.Create(6)
+```
+- process
+----
+
+```go
   for i := 0; i < 100; i++ {
 		coroutinepool.Run(func() {
 			fmt.Println("test", i)
 		})
-	}
-  
+  }
 
-exit
-======
+//or
+  for i := 0; i < 100; i++ {
+		p.Run(func() {
+			fmt.Println("test", i)
+		})
+  }
+  
+```
+- exit
+-----
+
+```go
 coroutinepool.Exit()
+
+//or
+p.Exit()
+```
