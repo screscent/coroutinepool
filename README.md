@@ -1,15 +1,14 @@
-##coroutinepool
+# coroutinepool
 =============
 
 gocoroutine pool
 
 
-##example
+## example
 ==============================
 
 
-- create
-----
+* create
 
 ```go
 coroutinepool.Create(6)
@@ -19,8 +18,7 @@ coroutinepool.Create(6)
 p:=coroutinepool.NewPool()
 p.Create(6)
 ```
-- process
-----
+* run
 
 ```go
   for i := 0; i < 100; i++ {
@@ -37,8 +35,7 @@ p.Create(6)
   }
   
 ```
-- exit
------
+* exit
 
 ```go
 coroutinepool.Exit()
