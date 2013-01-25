@@ -3,33 +3,54 @@
 package coroutinepool
 
 type coroutine struct {
-  	recv   chan func()
+	recv   chan func()
 	idlech chan *coroutine
 	exitch chan int
 }
 
-var idlech chan *coroutine
-var poolSize int = 0
+type Pool struct {
+	idlech   chan *coroutine
+	poolSize int
+}
 
-func Create(size int) {
-	poolSize = size
-	idlech = make(chan *coroutine)
-	for i := 0; i < poolSize; i++ {
-		c := &coroutine{make(chan func()), idlech, make(chan int)}
+var default_pool *Pool
+
+func NewPool() *Pool {
+	return &Pool{make(chan *coroutine), 0}
+}
+
+func (p *Pool) Create(size int) {
+	p.poolSize = size
+	for i := 0; i < p.poolSize; i++ {
+		c := &coroutine{make(chan func()), p.idlech, make(chan int)}
 		go c.run()
 	}
 }
 
-func Run(f func()) {
-	c := <-idlech
+func Create(size int) {
+	default_pool := NewPool()
+	default_pool.Create(size)
+}
+
+func (p *Pool) Run(f func()) {
+	c := <-p.idlech
 	c.recv <- f
 }
 
-func Exit() {
-	for i := 0; i < poolSize; i++ {
-		c := <-idlech
+func Run(f func()) {
+	c := <-default_pool.idlech
+	c.recv <- f
+}
+
+func (p *Pool) Exit() {
+	for i := 0; i < p.poolSize; i++ {
+		c := <-p.idlech
 		c.exitch <- 1
 	}
+}
+
+func Exit() {
+	default_pool.Exit()
 }
 
 func (c *coroutine) run() {
