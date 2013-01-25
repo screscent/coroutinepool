@@ -8,18 +8,19 @@ example
 ================
 
 
-//create
+create
+======
 coroutinepool.Create(6)
 
-//process
+process
+======
   for i := 0; i < 100; i++ {
 		coroutinepool.Run(func() {
 			fmt.Println("test", i)
 		})
 	}
   
-  .
-  .
-  .
-//exit
+
+exit
+======
 coroutinepool.Exit()
