@@ -3,7 +3,7 @@
 package coroutinepool
 
 type coroutine struct {
-  recv   chan func()
+  	recv   chan func()
 	idlech chan *coroutine
 	exitch chan int
 }
