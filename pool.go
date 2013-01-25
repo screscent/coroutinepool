@@ -1,5 +1,5 @@
 //author gonghh
-//Copyright 2013 gonghh(screscent). All rights reserved.
+//Copyright 2013 gonghh(screscent). Under the Apache License, Version 2.0.
 package coroutinepool
 
 type coroutine struct {
