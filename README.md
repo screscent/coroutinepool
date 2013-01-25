@@ -1,8 +1,9 @@
 # coroutinepool
 =============
-go coroutine pool
-author gonghh
-Copyright 2013 gonghh(screscent). All rights reserved.
+go coroutine pool  
+
+author gonghh  
+Copyright 2013 gonghh(screscent). All rights reserved.  
 
 
 
